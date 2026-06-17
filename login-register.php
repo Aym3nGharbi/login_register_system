@@ -3,10 +3,17 @@ session_start();
 include 'config.php';
 
 if (isset($_POST["register"])) {
-    $name= $_POST["name"];
+    $name = $_POST["name"];
     $email = $_POST["email"];
     $password = password_hash($_POST["password"], PASSWORD_DEFAULT);
     $role = $_POST["role"];
+
+    if (empty($role)) {
+        $_SESSION["register_error"] = "Please select an account type";
+        $_SESSION["active_form"] = "register";
+        header("Location: index.php");
+        exit;
+    }
 
     $checkemail = $conn->query("SELECT email FROM users WHERE email = '$email'");
     if ($checkemail->num_rows > 0) {
@@ -30,8 +37,9 @@ if (isset($_POST["Login"])) {
         if (password_verify($password, $user['password'])) {
             $_SESSION["name"] = $user['name'];
             $_SESSION["email"] = $user['email'];
+            $_SESSION["role"] = $user['role'];
 
-            if ($user['role'] === 'admin') {
+            if ($user['role'] === 'superadmin') {
                 header("Location: admin_page.php");
             } else {
                 header("Location: user_page.php");
@@ -41,10 +49,9 @@ if (isset($_POST["Login"])) {
         }
     }
 
-    $_SESSION["login_error"] = "Email ot Password is Incorrect";
+    $_SESSION["login_error"] = "Email or Password is Incorrect";
     $_SESSION["active_form"] = "login";
     header("Location: index.php");
     exit;
 }
-
 ?>
