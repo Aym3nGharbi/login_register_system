@@ -57,27 +57,19 @@ while ($row = $result->fetch_assoc()) {
                 <tbody>
                     <?php foreach ($users as $user): ?>
                         <tr>
-                            <td>
-                                <?= $user['id']; ?>
-                            </td>
-                            <td>
-                                <?= $user['name']; ?>
-                            </td>
-                            <td>
-                                <?= $user['email']; ?>
-                            </td>
-                            <td>
-                                <?= $user['role']; ?>
-                            </td>
+                            <td><?= $user['id']; ?></td>
+                            <td><?= $user['name']; ?></td>
+                            <td><?= $user['email']; ?></td>
+                            <td><span class="badge badge-<?= $user['role']; ?>"><?= $user['role']; ?></span></td>
                             <td>
                                 <form action="" method="POST" style="display:flex; gap:8px; margin:0;">
                                     <input type="hidden" name="user_id" value="<?= $user['id']; ?>">
                                     <select name="new_role">
-                                        <option value="individual" <?= $user['role'] === 'individual' ? 'selected' : ''; ?>
-                                            >Individual</option>
+                                        <option value="individual" <?= $user['role'] === 'individual' ? 'selected' : ''; ?>>
+                                            Individual</option>
                                         <option value="organisation" <?= $user['role'] === 'organisation' ? 'selected' : ''; ?>>Organisation</option>
-                                        <option value="superadmin" <?= $user['role'] === 'superadmin' ? 'selected' : ''; ?>
-                                            >Super Admin</option>
+                                        <option value="superadmin" <?= $user['role'] === 'superadmin' ? 'selected' : ''; ?>>
+                                            Super Admin</option>
                                     </select>
                                     <button type="submit" name="change_role">Save</button>
                                 </form>

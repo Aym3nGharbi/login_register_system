@@ -67,7 +67,7 @@ if (!empty($search)) {
                                     <td><?= $user['id']; ?></td>
                                     <td><?= $user['name']; ?></td>
                                     <td><?= $user['email']; ?></td>
-                                    <td><?= $user['role']; ?></td>
+                                    <td><span class="badge badge-<?= $user['role']; ?>"><?= $user['role']; ?></span></td>
                                 </tr>
                             <?php endforeach; ?>
                         <?php else: ?>
