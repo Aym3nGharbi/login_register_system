@@ -39,6 +39,7 @@ Do NOT deploy this application publicly.
 ## Technologies Used
 
 - PHP
+- JS
 - MySQL
 - HTML
 - CSS
